@@ -168,6 +168,6 @@ library SafeERC20 {
         // and not revert is the subcall reverts.
 
         (bool success, bytes memory returndata) = address(token).call(data);
-        return success && (returndata.length == 0 || abi.decode(returndata, (bool))) && address(token).code.length > 0;
+        return success && ((returndata.length == 0 && address(token).code.length > 0) || abi.decode(returndata, (bool)));
     }
 }
